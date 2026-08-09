@@ -1,0 +1,80 @@
+<div class="component-container">
+  <div class="header">
+    <h2>Analytics Dashboard</h2>
+    <p class="subtitle">{{ data.period }}</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon">📊</div>
+      <div class="metric-value">{{ data.metrics.pageViews | number }}</div>
+      <div class="metric-label">Page Views</div>
+      <div class="metric-change positive">+12.5%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">👤</div>
+      <div class="metric-value">{{ data.metrics.uniqueVisitors | number }}</div>
+      <div class="metric-label">Unique Visitors</div>
+      <div class="metric-change positive">+8.3%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">📉</div>
+      <div class="metric-value">{{ data.metrics.bounceRate }}%</div>
+      <div class="metric-label">Bounce Rate</div>
+      <div class="metric-change negative">-2.1%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">⏱️</div>
+      <div class="metric-value">{{ data.metrics.avgSessionDuration }}</div>
+      <div class="metric-label">Avg. Session</div>
+      <div class="metric-change positive">+15.7%</div>
+    </div>
+  </div>
+
+  <div class="content-sections">
+    <div class="section top-pages">
+      <h3>Top Pages</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Page</th>
+              <th>Views</th>
+              <th>Progress</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let page of data.topPages">
+              <td class="page-name">{{ page.page }}</td>
+              <td class="page-views">{{ page.views | number }}</td>
+              <td class="page-progress">
+                <div class="progress-bar">
+                  <div class="progress-fill" [style.width.%]="getProgressWidth(page.views)"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section chart-section">
+      <h3>Traffic Trend</h3>
+      <div class="chart-container">
+        <div class="chart-bars">
+          <div *ngFor="let item of data.chartData" class="chart-bar-container">
+            <div class="chart-bar" [style.height.%]="getBarHeight(item.visits)">
+              <span class="bar-value">{{ item.visits }}</span>
+            </div>
+            <div class="chart-label">{{ formatDate(item.date) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" (click)="refreshData()">Refresh Data</button>
+    <button class="btn btn-secondary" (click)="exportReport()">Export Report</button>
+  </div>
+</div>

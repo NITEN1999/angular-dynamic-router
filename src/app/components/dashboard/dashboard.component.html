@@ -1,0 +1,47 @@
+<div class="component-container">
+  <div class="header">
+    <h2>{{ data.title }}</h2>
+    <p class="subtitle">Overview of your application metrics</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-value">{{ data.stats.users || 0 }}</div>
+      <div class="stat-label">Total Users</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">💰</div>
+      <div class="stat-value">${{ data.stats.revenue || 0 }}</div>
+      <div class="stat-label">Revenue</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">✓</div>
+      <div class="stat-value">{{ data.stats.tasks || 0 }}</div>
+      <div class="stat-label">Tasks</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📁</div>
+      <div class="stat-value">{{ data.stats.projects || 0 }}</div>
+      <div class="stat-label">Projects</div>
+    </div>
+  </div>
+
+  <div class="activity-section">
+    <h3>Recent Activity</h3>
+    <div class="activity-list">
+      <div *ngFor="let activity of data.recentActivity" class="activity-item">
+        <span class="activity-dot"></span>
+        <div class="activity-content">
+          <p class="activity-action">{{ activity.action }}</p>
+          <p class="activity-time">{{ activity.time }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" (click)="updateStats()">Update Stats</button>
+    <button class="btn btn-secondary" (click)="addActivity()">Add Activity</button>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="component-container">
+  <div class="header">
+    <h2>User Profile</h2>
+    <p class="subtitle">Manage your personal information</p>
+  </div>
+
+  <div class="profile-card">
+    <div class="avatar-section">
+      <img [src]="data.avatar || 'https://via.placeholder.com/150'" alt="Profile Avatar" class="avatar">
+      <button class="btn btn-small">Change Photo</button>
+    </div>
+
+    <div class="profile-details">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" [(ngModel)]="data.name" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="data.email" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label>Role</label>
+        <input type="text" [(ngModel)]="data.role" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" [(ngModel)]="data.location" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label>Bio</label>
+        <textarea [(ngModel)]="data.bio" class="form-textarea" rows="4"></textarea>
+      </div>
+
+      <div class="info-section">
+        <div class="info-item">
+          <span class="info-label">Member Since:</span>
+          <span class="info-value">{{ data.joinDate }}</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" (click)="saveProfile()">Save Changes</button>
+        <button class="btn btn-secondary" (click)="resetProfile()">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>
